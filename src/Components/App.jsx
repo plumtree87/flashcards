@@ -57,14 +57,15 @@ class App extends Component {
             collection: collection.data
         })
         console.log(collection.data)
-        return collection.data.map(collection =>
-            <Flash  
-                
-                deck={collection}
-                
-            />
-        );
-    
+        let deck = collection.data.map(collection => {
+            console.log('Flash Data', collection);
+            return collection
+        });
+        console.log(deck)
+        this.setState({
+            cards: deck
+        })
+        console.log(this.state.cards)
         
     }
 
@@ -85,9 +86,16 @@ class App extends Component {
 
     
     }
+
+    renderDeck(){
+        if(this.state.cards.length > 0){
+            <Flash deck= {this.state.cards} />
+        }
+    }
     
 
     render() { 
+        {this.renderDeck()}
         return (
             <div>
             <CreateFlashCard 
@@ -98,8 +106,10 @@ class App extends Component {
         />
             <div className='scroll' id='scroll'>
             {this.mapCollections()}
+       
             </div>
             <div id='flash'>
+            {this.renderDeck()}
              
             </div>
             </div>
