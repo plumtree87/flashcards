@@ -15,12 +15,12 @@ class App extends Component {
         collections: [],
         
     }
-    
+
 
     componentDidMount(){
         this.getAllCollections();
        // this.getAllCards();
-        console.log(this.state.collections)
+       console.log(this.state.cards)
     }
 
     async getAllCollections(){
@@ -37,6 +37,17 @@ class App extends Component {
             cards: cards.data, 
         })
 
+    }
+
+    async putCard(id, xcollection){
+        let xword = prompt('What do you want the front side for the WORD to be?')
+        let xdefinition = prompt("What is the backside of the card for the defiintion of this word?")
+        await axios.put(`http://127.0.0.1:8000/flashcards/${id}/`, {
+            word: xword,
+            definition: xdefinition,
+            collection: xcollection
+        })
+        this.getDeck(xcollection)
     }
 
     async addCollection(collection){
@@ -97,7 +108,10 @@ class App extends Component {
     renderDeck(){
         if(this.state.cards.length > 0){
             return this.state.cards.map(mappedCards =>{
-               return <Flash deck= {mappedCards} />
+               return <Flash 
+               deck= {mappedCards}
+               putCard={(id, xword, xdefinition, xcollection) => this.putCard(id, xword, xdefinition, xcollection)}
+                />
             });
             
         }
@@ -105,6 +119,7 @@ class App extends Component {
     
 
     render() { 
+        
      
         return (
             <div>
