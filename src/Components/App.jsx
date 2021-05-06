@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Flash from './FlashCards/playFlashCards'
 import GetDeck from './FlashCards/getDeck'
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Col, Row, Container } from 'react-bootstrap';
 
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
 
     componentDidMount(){
         this.getAllCollections();
-        this.getAllCards();
+       // this.getAllCards();
         console.log(this.state.collections)
     }
 
@@ -45,9 +45,15 @@ class App extends Component {
 
     }
 
+    async deleteCollection(id){
+        await axios.delete(`http://127.0.0.1:8000/single/${id}/`);
+        this.getAllCollections();
+
+    }
+
     async addCard(card){
         await axios.post('http://127.0.0.1:8000/flashcards/', card);
-        this.getAllCards();
+        this.getDeck(card.collection)
     }
 
     async getDeck(id){
@@ -79,6 +85,7 @@ class App extends Component {
          
             collection={collection}
             getDeck ={(id) => this.getDeck(id)}
+            deleteCollection = {(id) => this.deleteCollection(id)}
         />
         )
 
@@ -89,13 +96,16 @@ class App extends Component {
 
     renderDeck(){
         if(this.state.cards.length > 0){
-            <Flash deck= {this.state.cards} />
+            return this.state.cards.map(mappedCards =>{
+               return <Flash deck= {mappedCards} />
+            });
+            
         }
     }
     
 
     render() { 
-        {this.renderDeck()}
+     
         return (
             <div>
             <CreateFlashCard 
@@ -104,14 +114,25 @@ class App extends Component {
         collections={this.state.collections}
         mapDecks={this.mapCollections.bind(this)}
         />
-            <div className='scroll' id='scroll'>
+            <Container>
+                <Row>
+                <Col>
+                <div className='scroll' id='scroll'>
             {this.mapCollections()}
-       
             </div>
-            <div id='flash'>
+                </Col>
+                <Col>
+                <div id='flash' className='card-grid'>
             {this.renderDeck()}
              
             </div>
+                </Col>
+                 </Row>
+            </Container>
+
+         
+
+
             </div>
 
         );

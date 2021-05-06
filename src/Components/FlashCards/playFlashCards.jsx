@@ -1,20 +1,34 @@
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap';
 
 
 const Flash = (props) => {
 
-    console.log()
+   const [isFront, setSide] = useState(false);
 
 
+   useEffect(() =>{
+       console.log('Use Effect running')
+   });
 
+
+   function callTwoFunctions(){
+       setSide(!isFront)
+    //    if(isFront === true){
+    //        document.getElementById('flashCard').style.backgroundColor = 'yellow';
+    //    }
+    //    if(isFront === false){
+    //        document.getElementById('flashCard').style.backgroundColor = 'brown';
+    //    }
+   }
+ 
     return (
-        <div id='flash'>
-       <Card id='flashCard'>
-        {props.deck.word} {props.deck.definition} HELOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo
-       </Card>
-       </div>
+       
+        <Card id='flashCard' onClick={() => callTwoFunctions()}>
+        {isFront ? props.deck.definition : props.deck.word}
+        </Card>
+      
   
 
     );

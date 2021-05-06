@@ -10,7 +10,8 @@ class CreateFlashCard extends Component {
             word: '',
             definition: '',
             collection: '',
-            deck: 0
+            deck: 0,
+            didAdd: false,
         }
         this.handleChange= this.handleChange.bind(this);
         this.handleSubmit= this.handleSubmit.bind(this);
@@ -28,10 +29,11 @@ class CreateFlashCard extends Component {
 
     handleCardSubmit(event){
         event.preventDefault();
+        let i = this.props.collections.length -1
         const card = {
             word: this.state.word,
             definition: this.state.definition,
-            collection: this.props.collections.length -1
+            collection: this.props.collections[i].id
         }
         this.props.addCard(card);
         this.setState({
@@ -44,14 +46,46 @@ class CreateFlashCard extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const collection = {
-            title: this.state.title
+            title: this.state.title,
+           
 
         }
         this.props.addCollection(collection);
+        let i = this.props.collections.length -1
         this.setState({
-            collection: this.props.collections.length -1,
-            deck: 0
+            collection: this.props.collections[i].id,
+            deck: 0,
+            didAdd: true
         });
+       
+    }
+    renderIntro(){
+        if(this.state.didAdd === false){
+        return (
+         
+               
+            <Card>
+            <p>Create Collection</p>
+            <div type='container'>
+                 <form onSubmit={this.handleSubmit}>
+
+                        <div>
+                        <label>Title/Subject of Collection</label>
+                        <input type='text' name="title" value={this.state.title} onChange={this.handleChange} />
+                        </div>
+                        <div>
+                      <input type='submit' value='Add' />
+                      </div>
+                </form>
+                </div>
+                </Card>
+        )};
+    }
+
+    setDidAdd(){
+        this.setState({
+            didAdd: false
+        })
     }
     
     renderTitle(){
@@ -59,17 +93,17 @@ class CreateFlashCard extends Component {
             return(
             <Card>
                 <p>First Create the title/subject for the deck of flashcards.
-                 Press ADD button BEFORE you add a card.
+                 Press ADD button. Then you can add the cards to that collection. Press FINISH if you're done adding cards to this collection.
                 </p>
             </Card>
             );
 
         }
-        if(this.state.title !== ''){
+        if(this.state.didAdd === true){
             return (
-            <Card>
+            <Card id='addCard'>
              <h3>Add new card to: "{this.state.title}"</h3>
-                    <h3>{this.state.deck} {this.props.collections.collection}</h3>
+                    <h3>Card Count: {this.state.deck} {this.props.collections.collection}</h3>
             <div type='container'>
                  <form onSubmit={this.handleCardSubmit}>
 
@@ -86,6 +120,7 @@ class CreateFlashCard extends Component {
                       </div>
                 </form>
                 </div>
+                <button id='finish' onClick={() => this.setDidAdd()}> Finish  </button>
                 </Card>
             );
 
@@ -99,22 +134,7 @@ class CreateFlashCard extends Component {
             <div id='createFlashCard'>
                 <hr />
                
-                    <h3>Create New Collection</h3>
-               
-                <Card>
-                <div type='container'>
-                     <form onSubmit={this.handleSubmit}>
-
-                            <div>
-                            <label>Title/Subject of Collection</label>
-                            <input type='text' name="title" value={this.state.title} onChange={this.handleChange} />
-                            </div>
-                            <div>
-                          <input type='submit' value='Add' />
-                          </div>
-                    </form>
-                    </div>
-                    </Card>
+                    {this.renderIntro()}
 
                    {this.renderTitle()}
                
