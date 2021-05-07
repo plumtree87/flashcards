@@ -32,7 +32,8 @@ const Flash = (props) => {
         <button id='editCard' onClick={() => props.putCard(props.deck.id, props.deck.collection)}>Edit</button>
         </div>
         <div>
-            <button id='deleteCard'>Delete</button>
+            
+            <button id='deleteCard' onClick={() => props.deleteCard(props.deck.id, props.deck.collection)}>Delete</button>
         </div>
         </Card>
       

@@ -63,8 +63,16 @@
 }
 
 #deleteCard {
-    width: 50px;
+    width: 65px;
     float: right;
     background-color: rgba(0, 0, 255, 0);
     border-width: 0px;
+}
+
+#flashCardCol {
+    max-width: 70%;
+}
+
+#deckCol {
+    max-width: 30%
 }

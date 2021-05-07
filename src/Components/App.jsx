@@ -50,6 +50,18 @@ class App extends Component {
         this.getDeck(xcollection)
     }
 
+    captureFK(fk){
+        console.log(fk)
+
+    }
+
+    async deleteCard(id, fk){
+        console.log(id)
+        console.log(fk)
+        await axios.delete(`http://127.0.0.1:8000/flashcards/${id}/`)
+        this.getDeck(fk)
+    }
+
     async addCollection(collection){
       await axios.post('http://127.0.0.1:8000/collection/', collection);
        this.getAllCollections();
@@ -61,6 +73,8 @@ class App extends Component {
         this.getAllCollections();
 
     }
+
+
 
     async addCard(card){
         await axios.post('http://127.0.0.1:8000/flashcards/', card);
@@ -99,18 +113,17 @@ class App extends Component {
             deleteCollection = {(id) => this.deleteCollection(id)}
         />
         )
-
-        
-
     
     }
 
+    //left some junk code inside putCard(parameters) in case i find time to put word and definition without a prompt, and still need them. I often forget to setup parameters properly here.
     renderDeck(){
         if(this.state.cards.length > 0){
             return this.state.cards.map(mappedCards =>{
                return <Flash 
                deck= {mappedCards}
                putCard={(id, xword, xdefinition, xcollection) => this.putCard(id, xword, xdefinition, xcollection)}
+               deleteCard={(id, fk) => this.deleteCard(id, fk)}
                 />
             });
             
@@ -131,12 +144,12 @@ class App extends Component {
         />
             <Container>
                 <Row>
-                <Col>
+                <Col id='deckCol'>
                 <div className='scroll' id='scroll'>
             {this.mapCollections()}
             </div>
                 </Col>
-                <Col>
+                <Col id='flashCardCol'>
                 <div id='flash' className='card-grid'>
             {this.renderDeck()}
              
