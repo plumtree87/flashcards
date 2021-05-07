@@ -5,7 +5,7 @@ import Flash from './FlashCards/playFlashCards'
 import GetDeck from './FlashCards/getDeck'
 import { Card, Button, Col, Row, Container } from 'react-bootstrap';
 import { render } from '@testing-library/react';
-import Counter from './FlashCards/counter'
+
 
 
 class App extends Component {

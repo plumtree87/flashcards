@@ -21,7 +21,7 @@
 
 #flash {
     overflow-y: scroll;
-    height: 500px;
+    height: 400px;
 }
 
 #flashCard {
@@ -77,7 +77,8 @@
 }
 
 #deckCol {
-    max-width: 30%
+    max-width: 30%;
+    padding-top: 20%;
 }
 
 #counter {

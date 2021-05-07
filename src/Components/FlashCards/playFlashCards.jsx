@@ -33,7 +33,7 @@ const Flash = (props) => {
      
       
      
-        {isFront ? props.deck.definition : props.deck.word}  
+        {isFront ? props.deck.definition : <center>{props.deck.word}</center>}  
         
         <div id='flashCardDiv'>
         <button id='editCard' onClick={() => props.putCard(props.deck.id, props.deck.collection)}>Edit</button>
