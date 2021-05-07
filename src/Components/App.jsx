@@ -1,10 +1,11 @@
 import CreateFlashCard from './CreateFlashCard/createFlashCard'
 import React, { Component } from 'react';
 import axios from 'axios';
-import Flash from './FlashCards/playFlashCards'
+import Flash from './FlashCards/listCards'
 import GetDeck from './FlashCards/getDeck'
 import { Card, Button, Col, Row, Container } from 'react-bootstrap';
 import { render } from '@testing-library/react';
+import View from './FlashCards/viewCards';
 
 
 
@@ -15,7 +16,8 @@ class App extends Component {
         collection: [],
         cards: [],
         collections: [],
-        cardNumber: 0
+        cardNumber: 0,
+        viewTrueListFalse: true
         
     }
 
@@ -115,8 +117,34 @@ class App extends Component {
     }
 
 
+    goToNextCard(){
+        let cardNum = this.state.cardNumber;
+        cardNum++;
+        if(cardNum === this.state.cards.length){
+            cardNum = 0;
+        }
+   
+        this.setState({
+            cardNumber: cardNum
+        });
+
+    }
+    goToPreviousCard(){
+        let cardNum = this.state.cardNumber;
+        cardNum--;
+        if(cardNum < 0)
+        cardNum = this.state.cards.length -1;
+        this.setState({
+            bookNumber: cardNum
+        });
+    }
+
+    //  countCards = { cardNumber + " / " + this.state.cards.length }
+    // 
+
+
     //left some junk code inside putCard(parameters) in case i find time to put word and definition without a prompt, and still need them. I often forget to setup parameters properly here.
-    renderDeck(){
+    renderDeckList(){
         if(this.state.cards.length > 0){
             let cardNumber = this.state.cardNumber;
             return this.state.cards.map(mappedCards =>{
@@ -127,13 +155,32 @@ class App extends Component {
                deck= {mappedCards}
                putCard={(id, xword, xdefinition, xcollection) => this.putCard(id, xword, xdefinition, xcollection)}
                deleteCard={(id, fk) => this.deleteCard(id, fk)}
-               countCards = { cardNumber + " / " + this.state.cards.length }
-                
+               countCards = {cardNumber + ' / ' + this.state.cards.length}
+              
             
                 />
             });
             
         }
+    }
+
+    RenderDeckView(){
+        if(this.state.cards.length > 0){
+            return <View 
+                nextCard = {() => this.goToNextCard()}
+                previousCard = {() => this.goToPreviousCard()}
+                card={this.state.cards[this.state.cardNumber]} nextCard={() => this.goToNextCard()} previousCard={() => this.goToPreviousCard()}
+                countCards = {this.state.cardNumber}
+            />
+        }
+    }
+
+    renderViewOrList(){
+        const notThis = !this.state.viewTrueListFalse
+        this.setState({
+            viewTrueListFalse: notThis
+        })
+
     }
     
 
@@ -156,10 +203,13 @@ class App extends Component {
             </div>
                 </Col>
                 <Col id='flashCardCol'>
+                <button id='viewChange' onClick={() => this.renderViewOrList()}>
+            View
+            </button>
                 <div id='flash' className='card-grid'>
-            {this.renderDeck()}
-          
-             
+
+            {this.state.viewTrueListFalse ? this.RenderDeckView() : this.renderDeckList()} 
+     
             </div>
                 </Col>
                  </Row>
