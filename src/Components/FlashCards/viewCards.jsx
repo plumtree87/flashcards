@@ -30,7 +30,7 @@ const View = (props) => {
             </button>
         
         </div>
-        <Card id='flashCard' onClick={() => callTwoFunctions()}>
+        <Card id='flashCardView' onClick={() => callTwoFunctions()}>
      
    
        
@@ -40,7 +40,7 @@ const View = (props) => {
      
         {isFront ? props.card.definition : <center>{props.card.word}</center>}  
         
-        <div id='flashCardDiv'>
+        <div id='flashCardViewDiv'>
         <button id='editCard' onClick={() => props.putCard(props.deck.id, props.deck.collection)}>Edit</button>
         </div>
         <div>
