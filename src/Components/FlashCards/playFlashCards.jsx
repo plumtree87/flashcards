@@ -23,11 +23,18 @@ const Flash = (props) => {
     //    }
     }
 
- 
     return (
        
         <Card id='flashCard' onClick={() => callTwoFunctions()}>
-        {isFront ? props.deck.definition : props.deck.word}
+     
+   
+       
+       <div id='cardCounter'>{props.countCards}</div>
+     
+      
+     
+        {isFront ? props.deck.definition : props.deck.word}  
+        
         <div id='flashCardDiv'>
         <button id='editCard' onClick={() => props.putCard(props.deck.id, props.deck.collection)}>Edit</button>
         </div>

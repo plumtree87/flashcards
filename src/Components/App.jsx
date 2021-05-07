@@ -4,6 +4,8 @@ import axios from 'axios';
 import Flash from './FlashCards/playFlashCards'
 import GetDeck from './FlashCards/getDeck'
 import { Card, Button, Col, Row, Container } from 'react-bootstrap';
+import { render } from '@testing-library/react';
+import Counter from './FlashCards/counter'
 
 
 class App extends Component {
@@ -13,6 +15,7 @@ class App extends Component {
         collection: [],
         cards: [],
         collections: [],
+        cardNumber: 0
         
     }
 
@@ -48,11 +51,6 @@ class App extends Component {
             collection: xcollection
         })
         this.getDeck(xcollection)
-    }
-
-    captureFK(fk){
-        console.log(fk)
-
     }
 
     async deleteCard(id, fk){
@@ -116,14 +114,22 @@ class App extends Component {
     
     }
 
+
     //left some junk code inside putCard(parameters) in case i find time to put word and definition without a prompt, and still need them. I often forget to setup parameters properly here.
     renderDeck(){
         if(this.state.cards.length > 0){
+            let cardNumber = this.state.cardNumber;
             return this.state.cards.map(mappedCards =>{
+                
+                cardNumber += 1;
+                console.log("cardnumber", cardNumber);
                return <Flash 
                deck= {mappedCards}
                putCard={(id, xword, xdefinition, xcollection) => this.putCard(id, xword, xdefinition, xcollection)}
                deleteCard={(id, fk) => this.deleteCard(id, fk)}
+               countCards = { cardNumber + " out of " + this.state.cards.length }
+                
+            
                 />
             });
             
@@ -152,6 +158,7 @@ class App extends Component {
                 <Col id='flashCardCol'>
                 <div id='flash' className='card-grid'>
             {this.renderDeck()}
+          
              
             </div>
                 </Col>
