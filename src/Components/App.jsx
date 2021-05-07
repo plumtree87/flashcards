@@ -127,7 +127,7 @@ class App extends Component {
                deck= {mappedCards}
                putCard={(id, xword, xdefinition, xcollection) => this.putCard(id, xword, xdefinition, xcollection)}
                deleteCard={(id, fk) => this.deleteCard(id, fk)}
-               countCards = { cardNumber + " out of " + this.state.cards.length }
+               countCards = { cardNumber + " / " + this.state.cards.length }
                 
             
                 />
