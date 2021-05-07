@@ -12,7 +12,7 @@ const Flash = (props) => {
        console.log('Use Effect running')
    });
 
-
+   // changing color using getElementByID didnt' work for every instance of of the div #flashCard  so.. Idk i need to think of another way to get every card to change color on click
    function callTwoFunctions(){
        setSide(!isFront)
     //    if(isFront === true){
