@@ -49,6 +49,7 @@
     height: 300px;
 }
 
+
 #finish {
     width: 33%;
    margin-left: 65%;
@@ -113,3 +114,26 @@
 #viewChange {
     margin-left: 80%;
 }
+
+#cardViewNext {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    height: 100%;
+    
+}
+
+#frontView {
+  
+ height: 400px;
+  
+ 
+}
+
+#backView {
+ 
+    overflow-y: scroll;
+    word-break: break-word;
+    height: 400px;
+  
+}
+

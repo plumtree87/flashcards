@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap';
+import ReactCardFlip from 'react-card-flip';
 
 
 const View = (props) => {
@@ -8,7 +9,7 @@ const View = (props) => {
 
 
    useEffect(() =>{
-       console.log('Use Effect running')
+       console.log('Use Effect running', isFront)
    });
 
 
@@ -22,38 +23,36 @@ const View = (props) => {
     //    }
     }
 
+    const handleClick = (event) => {
+        event.stopPropagation();
+        setSide(!isFront);
+    }
+
     return (
-        <div>
-        <div>
-            <button onClick={() => props.nextCard()}>
-                Next Card
-            </button>
-        
-        </div>
-        <Card id='flashCardView' onClick={() => callTwoFunctions()}>
      
-   
+    
+        <ReactCardFlip isFlipped={isFront} flipDirection='vertical'>
+
+        <div id='frontView' style={{backgroundColor: 'green'}} onClick={handleClick}>
+            {props.card.word} 
+     
+  
+        </div>
+
+        <div id='backView' style={{backgroundColor: 'yellow'}}  onClick={handleClick}>
+        <button id='cardViewNext' onClick={() => props.nextCard()}> {props.card.definition}</button>
+         
+        
+        <div>
+     
+        </div>
+        </div>  
+
        
-       <div id='cardCounter'>{props.countCards}</div>
-     
-      
-     
-        {isFront ? props.card.definition : <center>{props.card.word}</center>}  
-        
-        <div id='flashCardViewDiv'>
-        <button id='editCard' onClick={() => props.putCard(props.deck.id, props.deck.collection)}>Edit</button>
-        </div>
-        <div>
-            
-            <button id='deleteCard' onClick={() => props.deleteCard(props.deck.id, props.deck.collection)}>Delete</button>
-        </div>
-        </Card>
-        <div>
-        <button onClick={() => props.previousCard()}>
-        Previous Card
-        </button>
-        </div>
-        </div>
+  
+        </ReactCardFlip>
+
+ 
       
   
 
@@ -61,3 +60,38 @@ const View = (props) => {
 }
 
 export default View;
+
+
+/* <div>
+
+<Card id='flashCardView' onClick={() => callTwoFunctions()}>
+
+
+
+<div id='cardCounter'>{props.countCards}</div>
+
+
+
+{isFront ? props.card.definition : <center>{props.card.word}</center>}  
+
+<div id='flashCardViewDiv'>
+<button id='editCard' onClick={() => props.putCard(props.deck.id, props.deck.collection)}>Edit</button>
+</div>
+<div>
+    
+    <button id='deleteCard' onClick={() => props.deleteCard(props.deck.id, props.deck.collection)}>Delete</button>
+</div>
+</Card>
+<div>
+<button onClick={() => props.previousCard()}>
+Previous Card
+</button>
+
+    <button id='nextCardButton' onClick={() => props.nextCard()}>
+        Next Card
+    </button>
+
+
+</div>
+
+</div> */

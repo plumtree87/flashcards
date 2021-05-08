@@ -24,8 +24,7 @@ class App extends Component {
 
     componentDidMount(){
         this.getAllCollections();
-       // this.getAllCards();
-       console.log(this.state.cards)
+       
     }
 
     async getAllCollections(){
@@ -56,8 +55,6 @@ class App extends Component {
     }
 
     async deleteCard(id, fk){
-        console.log(id)
-        console.log(fk)
         await axios.delete(`http://127.0.0.1:8000/flashcards/${id}/`)
         this.getDeck(fk)
     }
@@ -87,16 +84,16 @@ class App extends Component {
         this.setState({
             collection: collection.data
         })
-        console.log(collection.data)
+    
         let deck = collection.data.map(collection => {
-            console.log('Flash Data', collection);
+        
             return collection
         });
-        console.log(deck)
+      
         this.setState({
             cards: deck
         })
-        console.log(this.state.cards)
+      
         
     }
 
@@ -104,20 +101,22 @@ class App extends Component {
         let collectionArray = this.state.collections.map(collection => {
             return collection
         })
-        console.log(collectionArray)
+   
         return collectionArray.map(collection =>
             <GetDeck  
          
             collection={collection}
             getDeck ={(id) => this.getDeck(id)}
             deleteCollection = {(id) => this.deleteCollection(id)}
+     
         />
         )
     
     }
 
 
-    goToNextCard(){
+    goToNextCard(event){
+     
         let cardNum = this.state.cardNumber;
         cardNum++;
         if(cardNum === this.state.cards.length){
@@ -129,7 +128,8 @@ class App extends Component {
         });
 
     }
-    goToPreviousCard(){
+    goToPreviousCard(event){
+
         let cardNum = this.state.cardNumber;
         cardNum--;
         if(cardNum < 0)
@@ -150,7 +150,7 @@ class App extends Component {
             return this.state.cards.map(mappedCards =>{
                 
                 cardNumber += 1;
-                console.log("cardnumber", cardNumber);
+              
                return <Flash 
                deck= {mappedCards}
                putCard={(id, xword, xdefinition, xcollection) => this.putCard(id, xword, xdefinition, xcollection)}
@@ -163,6 +163,7 @@ class App extends Component {
             
         }
     }
+    
 
     RenderDeckView(){
         if(this.state.cards.length > 0){
@@ -194,6 +195,7 @@ class App extends Component {
         addCard={this.addCard.bind(this)}
         collections={this.state.collections}
         mapDecks={this.mapCollections.bind(this)}
+        
         />
             <Container>
                 <Row>
@@ -206,6 +208,7 @@ class App extends Component {
                 <button id='viewChange' onClick={() => this.renderViewOrList()}>
             View
             </button>
+   
                 <div id='flash' className='card-grid'>
 
             {this.state.viewTrueListFalse ? this.RenderDeckView() : this.renderDeckList()} 
