@@ -33,8 +33,8 @@ const View = (props) => {
     
         <ReactCardFlip isFlipped={isFront} flipDirection='vertical'>
 
-        <div id='frontView' style={{backgroundColor: 'green'}} onClick={handleClick}>
-            {props.card.word} 
+        <div id='frontView' style={{backgroundColor: 'green', color: 'yellow'}} onClick={handleClick}>
+           <center>{props.card.word}  </center> 
      
   
         </div>

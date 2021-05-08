@@ -70,11 +70,11 @@ class CreateFlashCard extends Component {
                  <form onSubmit={this.handleSubmit}>
 
                         <div>
-                        <label>Title/Subject of Collection</label>
+                        <label>Deck Title</label>
                         <input type='text' name="title" value={this.state.title} onChange={this.handleChange} />
                         </div>
                         <div>
-                      <input type='submit' value='Add' />
+                      <input type='submit' value='Add' id='inputButton'/>
                       </div>
                 </form>
                 </div>

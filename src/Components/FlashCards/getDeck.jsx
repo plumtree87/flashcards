@@ -10,8 +10,8 @@ const GetDeck = (props) => {
     
        <Card id='getDeckCard'  >
         {props.collection.title}   
-        <button onClick={() => props.getDeck(props.collection.id)}> Study </button>
-        <button onClick={() => props.deleteCollection(props.collection.id)}>Delete</button>
+        <button id='study' onClick={() => props.getDeck(props.collection.id)}> Study </button>
+        <button id='deleteDeck' onClick={() => props.deleteCollection(props.collection.id)}>Delete</button>
        </Card>
 
        </div>

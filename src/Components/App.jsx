@@ -115,27 +115,27 @@ class App extends Component {
     }
 
 
-    goToNextCard(event){
+    goToNextCard(){
      
         let cardNum = this.state.cardNumber;
-        cardNum++;
-        if(cardNum === this.state.cards.length){
+        cardNum ++;
+        if(cardNum === this.state.cards.length ){
             cardNum = 0;
         }
-   
+        console.log(cardNum, this.state.cards.length)
         this.setState({
             cardNumber: cardNum
         });
 
     }
-    goToPreviousCard(event){
+    goToPreviousCard(){
 
         let cardNum = this.state.cardNumber;
         cardNum--;
         if(cardNum < 0)
         cardNum = this.state.cards.length -1;
         this.setState({
-            bookNumber: cardNum
+            cardNumber: cardNum
         });
     }
 
@@ -146,7 +146,9 @@ class App extends Component {
     //left some junk code inside putCard(parameters) in case i find time to put word and definition without a prompt, and still need them. I often forget to setup parameters properly here.
     renderDeckList(){
         if(this.state.cards.length > 0){
+
             let cardNumber = this.state.cardNumber;
+
             return this.state.cards.map(mappedCards =>{
                 
                 cardNumber += 1;
