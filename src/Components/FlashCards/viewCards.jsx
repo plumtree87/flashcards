@@ -39,7 +39,7 @@ const View = (props) => {
   
         </div>
 
-        <div id='backView' style={{backgroundColor: 'yellow'}}  onClick={handleClick}>
+        <div id='backView' style={{backgroundColor: 'white'}}  onClick={handleClick}>
         <button id='cardViewNext' onClick={() => props.nextCard()}> {props.card.definition}</button>
          
         

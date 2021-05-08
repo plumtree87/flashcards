@@ -146,9 +146,14 @@ div > .card {
 
 #study {
   margin-bottom: 3px;
+  background-color: brown
 }
 
-button,
+#deleteDeck {
+    background-color: brown
+}
+
+
 input {
   overflow: visible;
   border-width: 1px;
@@ -183,3 +188,4 @@ input {
     border-color: green;
 
 }
+
