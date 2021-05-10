@@ -93,7 +93,7 @@ class CreateFlashCard extends Component {
             return(
             <Card>
                 <p>First Create the title/subject for the deck of flashcards.
-                 Press ADD button. Then you can add the cards to that collection. Press FINISH if you're done adding cards to this collection.
+                 Press ADD button. Then press the black add button for every card you want to add. Dont press FINISH until you're done adding cards using black add button once per card.
                 </p>
             </Card>
             );
