@@ -95,7 +95,9 @@ class CreateFlashCard extends Component {
                 <p>First Create the title/subject for the deck of flashcards.
                  Press ADD button. Then press the black add button for every card you want to add. Dont press FINISH until you're done adding cards using black add button once per card.
                 </p>
+           
             </Card>
+        
             );
 
         }
@@ -138,7 +140,7 @@ class CreateFlashCard extends Component {
 
                    {this.renderTitle()}
                
-        
+                   <center><b>{this.props.title}</b></center>
             </div>
         );
     }

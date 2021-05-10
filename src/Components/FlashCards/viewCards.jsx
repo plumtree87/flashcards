@@ -13,16 +13,6 @@ const View = (props) => {
    });
 
 
-   function callTwoFunctions(){
-       setSide(!isFront)
-    //    if(isFront === true){
-    //        document.getElementById('flashCard').style.backgroundColor = 'yellow';
-    //    }
-    //    if(isFront === false){
-    //        document.getElementById('flashCard').style.backgroundColor = 'brown';
-    //    }
-    }
-
     const handleClick = (event) => {
         event.stopPropagation();
         setSide(!isFront);
@@ -40,11 +30,11 @@ const View = (props) => {
         </div>
 
         <div id='backView' style={{backgroundColor: 'white', color: 'green'}}  onClick={handleClick}>
-        <button id='cardViewNext' onClick={() => props.nextCard()}> {props.card.definition}</button>
+        <button id='cardViewNext' onClick={() => props.nextCard()}> <center>{props.card.definition}</center></button>
          
         
-        <div>
-     
+         <div>
+        
         </div>
         </div>  
 

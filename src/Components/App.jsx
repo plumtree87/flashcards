@@ -17,7 +17,8 @@ class App extends Component {
         cards: [],
         collections: [],
         cardNumber: 0,
-        viewTrueListFalse: true
+        viewTrueListFalse: true,
+        title: [],
         
     }
 
@@ -84,6 +85,11 @@ class App extends Component {
         this.setState({
             collection: collection.data
         })
+        let collectionTitle = await axios.get(`http://127.0.0.1:8000/single/${id}/`)
+        this.setState({
+            title: collectionTitle.data
+        })
+       
     
         let deck = collection.data.map(collection => {
         
@@ -96,24 +102,6 @@ class App extends Component {
       
         
     }
-
-    mapCollections(){
-        let collectionArray = this.state.collections.map(collection => {
-            return collection
-        })
-   
-        return collectionArray.map(collection =>
-            <GetDeck  
-         
-            collection={collection}
-            getDeck ={(id) => this.getDeck(id)}
-            deleteCollection = {(id) => this.deleteCollection(id)}
-     
-        />
-        )
-    
-    }
-
 
     goToNextCard(){
      
@@ -128,6 +116,7 @@ class App extends Component {
         });
 
     }
+
     goToPreviousCard(){
 
         let cardNum = this.state.cardNumber;
@@ -174,9 +163,31 @@ class App extends Component {
                 previousCard = {() => this.goToPreviousCard()}
                 card={this.state.cards[this.state.cardNumber]} nextCard={() => this.goToNextCard()} previousCard={() => this.goToPreviousCard()}
                 countCards = {this.state.cardNumber}
+                
+                
+                
             />
         }
     }
+
+    
+    mapCollections(){
+        let collectionArray = this.state.collections.map(collection => {
+            return collection
+        })
+   
+        return collectionArray.map(collection =>
+            <GetDeck  
+         
+            collection={collection}
+            getDeck ={(id) => this.getDeck(id)}
+            deleteCollection = {(id) => this.deleteCollection(id)} 
+     
+        />
+        )
+    
+    }
+
 
     renderViewOrList(){
         const notThis = !this.state.viewTrueListFalse
@@ -185,6 +196,8 @@ class App extends Component {
         })
 
     }
+
+   
     
 
     render() { 
@@ -197,12 +210,14 @@ class App extends Component {
         addCard={this.addCard.bind(this)}
         collections={this.state.collections}
         mapDecks={this.mapCollections.bind(this)}
+        title = {this.state.title.title}
         
         />
             <Container>
                 <Row>
                 <Col id='deckCol'>
                 <div className='scroll' id='scroll'>
+         
             {this.mapCollections()}
             </div>
                 </Col>
@@ -212,7 +227,7 @@ class App extends Component {
             </button>
    
                 <div id='flash' className='card-grid'>
-
+               
             {this.state.viewTrueListFalse ? this.RenderDeckView() : this.renderDeckList()} 
      
             </div>
