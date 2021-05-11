@@ -22,6 +22,7 @@ const Flash = (props) => {
     //    if(isFront === false){
     //        document.getElementById('flashCard').style.backgroundColor = 'brown';
     //    }
+    // meh, this didn't work..
     }
 
     return (
