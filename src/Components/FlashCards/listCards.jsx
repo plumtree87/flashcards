@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap';
+import ModalButton from '../CreateFlashCard/modalButton'
 
 
 const Flash = (props) => {
