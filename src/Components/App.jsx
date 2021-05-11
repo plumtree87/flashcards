@@ -217,7 +217,7 @@ class App extends Component {
                 <Row>
                 <Col id='deckCol'>
                 <div className='scroll' id='scroll'>
-         
+            {this.state.title.title}
             {this.mapCollections()}
             </div>
                 </Col>
